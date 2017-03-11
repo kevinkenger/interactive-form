@@ -3,11 +3,17 @@ const nameInput = document.getElementById('name'),
       basicInfo = document.getElementsByTagName('fieldset')[0],
       tshirtInfo = document.getElementsByClassName('shirt')[0],
       activitiesInfo = document.getElementsByClassName('activities')[0],
-      paymentInfo = document.getElementsByTagName('fieldset')[0];
+      paymentInfo = document.getElementsByTagName('fieldset')[0],
+      totalEl = document.createElement('div');
+
+let total = 0;
+totalEl.textContent = `Total: $${total}`;
 
 window.onload = () => {    
     nameInput.focus();
     jobTitle.style.display = 'none';
+    totalEl.id = 'total';
+    activitiesInfo.appendChild(totalEl);
 }
 
 
@@ -68,15 +74,33 @@ activitiesInfo.addEventListener('change', (e) => {
           ];
     if ( time1.indexOf(checkbox) > -1 ) {
         activitiesChecker(checkbox, time1);
-    } else {
+    } else if ( time2.indexOf(checkbox) > -1 ) {
         activitiesChecker(checkbox, time2);
+    } else {
+        activitiesChecker(checkbox);
     }
 });
 
 const activitiesChecker = (checkbox, time) => {
-    for ( let i = 0; i < 3; i++ ) {
-        if ( time[i] != checkbox ) {
-            time[i].disabled = checkbox.checked;
+    if ( time ) {
+        for ( let i = 0; i < 3; i++ ) {
+            if ( time[i] != checkbox ) {
+                time[i].disabled = checkbox.checked;
+            }
         }
     }
+    if ( checkbox.checked ) {
+        if ( checkbox.name == 'all' ) {
+            total += 200;
+        } else {
+            total += 100;
+        }
+    } else {
+        if ( checkbox.name == 'all' ) {
+            total -= 200;
+        } else {
+            total -= 100;
+        }
+    }
+    totalEl.textContent = `Total: $${total}`;
 }

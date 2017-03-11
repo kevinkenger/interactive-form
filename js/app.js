@@ -3,7 +3,7 @@ const nameInput = document.getElementById('name'),
       basicInfo = document.getElementsByTagName('fieldset')[0],
       tshirtInfo = document.getElementsByClassName('shirt')[0],
       activitiesInfo = document.getElementsByClassName('activities')[0],
-      paymentInfo = document.getElementsByTagName('fieldset')[0],
+      paymentInfo = document.getElementsByTagName('fieldset')[3],
       totalEl = document.createElement('div');
 
 let total = 0;
@@ -33,27 +33,26 @@ basicInfo.addEventListener('change', (e) => {
 tshirtInfo.addEventListener('change', (e) => {
     if ( e.target.id != 'design' ) {
         return;
-    } else {
-        const colors = document.getElementById('color').children;
-        if ( e.target.value == 'js puns' ) {
-            for ( let i = 0; i < colors.length; i++ ) {
-                if ( i < 3 ) {
-                    colors[i].style.display = '';
-                } else {
-                    colors[i].style.display = 'none';
-                }
+    }
+    const colors = document.getElementById('color').children;
+    if ( e.target.value == 'js puns' ) {
+        for ( let i = 0; i < colors.length; i++ ) {
+            if ( i < 3 ) {
+                colors[i].style.display = '';
+            } else {
+                colors[i].style.display = 'none';
             }
-            colors[0].selected = true;
-        } else {
-            for ( let i = 0; i < colors.length; i++ ) {
-                if ( i < 3 ) {
-                    colors[i].style.display = 'none';
-                } else {
-                    colors[i].style.display = '';
-                }
-            }
-            colors[3].selected = true;
         }
+        colors[0].selected = true;
+    } else {
+        for ( let i = 0; i < colors.length; i++ ) {
+            if ( i < 3 ) {
+                colors[i].style.display = 'none';
+            } else {
+                colors[i].style.display = '';
+            }
+        }
+        colors[3].selected = true;
     }
 });
 
@@ -104,3 +103,34 @@ const activitiesChecker = (checkbox, time) => {
     }
     totalEl.textContent = `Total: $${total}`;
 }
+
+
+paymentInfo.addEventListener('change', (e) => {
+    if ( e.target.id != 'payment' ) {
+        return;
+    }
+    const payment = e.target,
+          cc = document.getElementById('credit-card');
+    switch ( payment.value ) {
+        case 'credit card':
+            cc.style.display = '';
+            cc.nextElementSibling.style.display = 'none';
+            cc.nextElementSibling.nextElementSibling.style.display = 'none';
+            break;
+        case 'paypal':
+            cc.style.display = 'none';
+            cc.nextElementSibling.style.display = '';
+            cc.nextElementSibling.nextElementSibling.style.display = 'none';
+            break;
+        case 'bitcoin':
+            cc.style.display = 'none';
+            cc.nextElementSibling.style.display = 'none';
+            cc.nextElementSibling.nextElementSibling.style.display = '';
+            break;
+        default:
+            cc.style.display = '';
+            cc.nextElementSibling.style.display = '';
+            cc.nextElementSibling.nextElementSibling.style.display = '';
+            break;
+    }
+});

@@ -10,6 +10,15 @@ window.onload = () => {
     jobTitle.style.display = 'none';
 }
 
+basicInfo.addEventListener('change', (e) => {
+    if ( e.target.value == 'other' ) {
+        jobTitle.style.display = '';
+        jobTitle.focus();
+    } else {
+        jobTitle.style.display = 'none';
+    }
+});
+
 tshirtInfo.addEventListener('change', (e) => {
     if ( e.target.id != 'design' ) {
         return;

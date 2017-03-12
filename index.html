@@ -20,10 +20,10 @@
       <fieldset>         
         <legend>Basic Info</legend>
         
-        <label for="name">Name:</label>
+        <label for="name">Name: <span class="error">(please provide your name)</span></label>
         <input type="text" id="name" name="user_name">
         
-        <label for="mail">Email:</label>
+        <label for="mail">Email: <span class="error">(please provide your email address)</span></label>
         <input type="email" id="mail" name="user_email">
         
         <label for="title">Job Role</label>
@@ -40,7 +40,7 @@
       
       <fieldset class="shirt">
         <legend>T-Shirt Info</legend>
-        
+        <p class="error">Don't forget to pick a T-Shirt</p>
         <div>
           <label for="size">Size:</label>
           <select id="size" name="user_size">
@@ -75,6 +75,7 @@
 
       <fieldset class="activities">
         <legend>Register for Activities</legend>
+        <p class="error">Please choose at least one activity</p>
         <label><input type="checkbox" name="all"> Main Conference — $200</label>
         <label><input type="checkbox" name="js-frameworks"> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
         <label><input type="checkbox" name="js-libs"> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
@@ -86,7 +87,7 @@
       </fieldset>
       <fieldset>
         <legend>Payment Info</legend>
-
+        <p class="error">Please select a payment method.</p>
         <label for="payment">I'm going to pay with:</label>
         <select id="payment" name="user_payment">
           <option value="select_method">Select Payment Method</option>
@@ -96,7 +97,8 @@
         </select>
 
         <div id="credit-card" class="credit-card">
-
+          <p class="error">Please fill out all of your credit card information.</p>
+          <p class="error">Please enter a valid credit card number.</p>
           <div class="col-6 col">
             <label for="cc-num">Card Number:</label>
         	  <input id="cc-num" name="user_cc-num" type="text">

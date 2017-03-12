@@ -76,21 +76,25 @@ label {
 	margin-bottom: .5em;
 }
 
-input,
-select {
-	margin-bottom: 1.125em;	
+.error {
+	display: none;
+	font-weight: bold;
+	color: darkred;
 }
 
-input {
+input,
+select {
 	font-size: 1em;
 	font-weight: 500;
 	padding: .8em;
 	background: #c1deeb;
 	border: 2px solid #c1deeb;
 	outline: none;
+	margin-bottom: 1.125em;	
 }
 
-input:focus {
+input:focus,
+select:focus {
 	background: #fff;
 	border-color: #5e97b0;
 	transition: border-color .4s, background-color .4s;

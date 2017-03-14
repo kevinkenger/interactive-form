@@ -1,4 +1,5 @@
 const totalEl = document.createElement('div'),
+      cc = document.getElementById('credit-card'),
       nameInput = document.getElementById('name'),
       emailInput = document.getElementById('mail'),
       form = document.getElementsByTagName('form')[0],
@@ -21,6 +22,8 @@ window.onload = () => {
     totalEl.id = 'total'; // give the total indicator element the id of "#total"
     activitiesInfo.appendChild(totalEl); // add "#total" to the activites section
     tshirtInfo.children[4].style.display = 'none'; // hide the colors select field
+    cc.nextElementSibling.style.display = 'none';
+    cc.nextElementSibling.nextElementSibling.style.display = 'none';
 }
 
 
@@ -41,7 +44,7 @@ tshirtInfo.addEventListener('change', (e) => {
     if ( e.target.id != 'design' ) {
         return; // exit the function
     }
-    tshirtInfo.children[4].style.display = ''; // show the color options select
+    tshirtInfo.children[4].style.display = 'inline-block'; // show the color options select
     const colors = document.getElementById('color').children;
     if ( e.target.value == 'js puns' ) {
         for ( let i = 0; i < colors.length; i++ ) {
@@ -52,7 +55,7 @@ tshirtInfo.addEventListener('change', (e) => {
             }
         }
         colors[0].selected = true;
-    } else {
+    } else if ( e.target.value == 'heart js' ) {
         for ( let i = 0; i < colors.length; i++ ) {
             if ( i < 3 ) {
                 colors[i].style.display = 'none';
@@ -61,6 +64,8 @@ tshirtInfo.addEventListener('change', (e) => {
             }
         }
         colors[3].selected = true;
+    } else {
+        tshirtInfo.children[4].style.display = 'none';
     }
 });
 
@@ -124,15 +129,9 @@ paymentInfo.addEventListener('change', (e) => {
         return; // exit the function
     }
 
-    const payment = e.target,
-          cc = document.getElementById('credit-card');
+    const payment = e.target;
     // check to see which payment type the user chooses and display the corresponding element
     switch ( payment.value ) {
-        case 'credit card':
-            cc.style.display = '';
-            cc.nextElementSibling.style.display = 'none';
-            cc.nextElementSibling.nextElementSibling.style.display = 'none';
-            break;
         case 'paypal':
             cc.style.display = 'none';
             cc.nextElementSibling.style.display = '';
@@ -143,10 +142,11 @@ paymentInfo.addEventListener('change', (e) => {
             cc.nextElementSibling.style.display = 'none';
             cc.nextElementSibling.nextElementSibling.style.display = '';
             break;
+        case 'credit card':
         default:
             cc.style.display = '';
-            cc.nextElementSibling.style.display = '';
-            cc.nextElementSibling.nextElementSibling.style.display = '';
+            cc.nextElementSibling.style.display = 'none';
+            cc.nextElementSibling.nextElementSibling.style.display = 'none';
             break;
     }
 });
@@ -193,7 +193,7 @@ form.addEventListener('submit', (e) => {
     }
 
     // if the user hasn't chosen a shirt design...
-    if ( document.getElementById('design').value != 'js puns' && document.getElementById('design') != 'heart js' ) {
+    if ( document.getElementById('design').value == 'Select Theme' ) {
         // show the error
         tshirtInfo.children[1].style.display = 'block';
     // if the user has chosen a design...

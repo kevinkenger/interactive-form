@@ -172,11 +172,12 @@ form.addEventListener('submit', (e) => {
     // prevent the form from actually being submitted
     e.preventDefault();
 
-
+    let errors = false;
     // if the name input is empty...
     if ( nameInput.value.trim() == '' ) {
         // display the error
         errorOnField(nameInput, true);
+        errors = true;
     // if the name input is not empty...
     } else {
         // remove the error
@@ -186,6 +187,7 @@ form.addEventListener('submit', (e) => {
     if ( emailInput.value.trim() == '' || !validateEmail(emailInput.value) ) {
         // display the error
         errorOnField(emailInput, true);
+        errors = true;
     // if email input is not empty and is valid...
     } else {
         // remove the error
@@ -196,6 +198,7 @@ form.addEventListener('submit', (e) => {
     if ( document.getElementById('design').value == 'Select Theme' ) {
         // show the error
         tshirtInfo.children[1].style.display = 'block';
+        erorrs = true;
     // if the user has chosen a design...
     } else {
         // remove the error
@@ -207,12 +210,14 @@ form.addEventListener('submit', (e) => {
         activitiesInfo.children[1].style.display = 'none';
     } else {
         activitiesInfo.children[1].style.display = 'block';
+        errors = true;
     }
 
     // if a payment method hasn't been chosen...
     if ( document.getElementById('payment').value == 'select_method' ) {
         // display the error
         paymentInfo.children[1].style.display = 'block';
+        errors = true;
     // if a payment method has been choosen...
     } else {
         // remove the error
@@ -224,6 +229,7 @@ form.addEventListener('submit', (e) => {
             if ( document.getElementById('cc-num').value.trim() == '' || document.getElementById('zip').value.trim() == '' || document.getElementById('cvv').value.trim() == '' ) {
                 // display the error
                 document.getElementById('credit-card').firstElementChild.style.display = 'block';
+                errors = true;
             // if all of the credit card input fields are filled out...    
             } else {
                 // remove the error
@@ -233,6 +239,7 @@ form.addEventListener('submit', (e) => {
             if ( !validateCreditCard(document.getElementById('cc-num').value) ) {
                 // display the error
                 document.getElementById('credit-card').children[1].style.display = 'block';
+                errors = true;
             // if the credit number is valid
             } else {
                 // remove the error
@@ -240,6 +247,7 @@ form.addEventListener('submit', (e) => {
             }
         }
     }
+    !errors ? form.submit() : alert('Please fill out all of the fields correctly.');
 });
 
 
